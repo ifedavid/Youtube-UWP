@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="App7.Views.VideosPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:App7.Models"
+    xmlns:control ="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+
+
+
+    <ScrollViewer>
+            <Grid x:Name="ContentArea">
+            <StackPanel>
+                    <controls:AdaptiveGridView
+            Padding="{StaticResource MediumLeftRightMargin}"
+            animations:Connected.ListItemElementName="itemThumbnail"
+            animations:Connected.ListItemKey="animationKeyVideos"
+            DesiredWidth="250"
+            Margin="5"
+            IsItemClickEnabled="True"
+            ItemClick="OnItemClick"
+            ItemHeight="300"
+            ItemsSource="{x:Bind Source,Mode=OneWay}"
+            SelectionMode="None"
+            StretchContentForSingleRow="False">
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:SearchResults">
+                                <Grid
+                        x:Name="itemThumbnail"
+                        Margin="5"
+                        Padding="10"
+                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                        <Image Source="{x:Bind Snippet.Thumbnails.High.Url}"
+                                 />
+                                        <TextBlock
+                                Margin="{StaticResource XXSmallTopMargin}"
+                                HorizontalAlignment="Center"
+                                Style="{ThemeResource BodyTextStyle}"
+                                Text="{x:Bind Snippet.Title}"
+                                TextWrapping="Wrap"
+                                TextAlignment="Center"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                    <!--<Grid Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="3" Width="80" >previous</Button>
+                        <Button Margin="5" Width="80" Grid.Column="1">next</Button>
+                    </Grid>-->
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+   
+
+</Page>
